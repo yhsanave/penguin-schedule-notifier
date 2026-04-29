@@ -1,19 +1,13 @@
-// URL secrets **DO NOT COMMIT**
-const ciWebhookURL = ""
-const roWebhookURL = ""
-const forwardURL = ""
+// URL Secrets **DO NOT COMMIT**
+const ciWebhookURL = "";
+const roWebhookURL = "";
+const forwardURL = "";
 
 // Sheet Configs
 const eventStartCell = { sheet: "Settings", cell: "F4" };
 const eventEndCell = { sheet: "Settings", cell: "F5" };
-const ciCell = { sheet: "Schedule", cell: "S6" };
-const roCell = { sheet: "Schedule", cell: "T6" };
-
-// Options
-// If you want to use embeds instead of plain messages, create one using https://discohook.app and use it as the CI/RO template. 
-// Use the same {0} notation recommended on the note in the settings sheet for variables.
-const useEmbedCI = false;
-const useEmbedRO = true;
+const ciCell = { sheet: "Schedule", cell: "S6"};
+const roCell = { sheet: "Schedule", cell: "T6"};
 
 /* 
 Automated notifications addon for @infinite_penguin's PRSK tiering shedule.
@@ -66,16 +60,11 @@ function notify() {
   // Check in message
   var ciMessage = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(ciCell.sheet).getRange(ciCell.cell).getValue();
   if (ciMessage != "") {
-    var ciContent;
-    if (useEmbedCI) {
-      ciContent = ciMessage;
-    } else {
-      ciContent = {
-        'content': ciMessage,
-        'embeds': [],
-        'attachments': []
-      };
-    }
+    var ciContent = {
+      'content': ciMessage,
+      'embeds': [],
+      'attachments': []
+    };
     sendMessage(ciContent, ciWebhookURL);
   } else {
     Logger.log("No check-in needed. Skipping.");
@@ -84,16 +73,11 @@ function notify() {
   // Room order message
   var roMessage = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(roCell.sheet).getRange(roCell.cell).getValue();
   if (roMessage != "") {
-    var roContent;
-    if (useEmbedRO) {
-      roContent = roMessage;
-    } else {
-      roContent = {
-        'content': roMessage,
-        'embeds': [],
-        'attachments': []
-      };
-    }
+    var roContent = {
+      'content': roMessage,
+      'embeds': [],
+      'attachments': []
+    };
     sendMessage(roContent, roWebhookURL);
   } else {
     Logger.log("No room order message needed. Skipping.");
