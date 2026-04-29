@@ -17,17 +17,12 @@ Original sheet here: https://docs.google.com/document/d/1t5OQ3joyqRTCu0n0sQ7jpcs
 
 Created by Yhsanave. Feel free to message me on Discord if you have any questions.
 
-Because of Discord's global rate limit, webhook requests from app scripts often get rate limited.
-To fix this, I created a basic API that just forwards the request to bypass the rate limit.
-Get this from my github and deploy it to some server, then put the URL for that server in the forwardURL variable.
-I used [leapcell](https://leapcell.io) when I did it because it was the first search result.
-Their free tier should be plenty (no payment info needed).
-Sorry, there really isn't a better way :(.
+See the README in the GitHub repo (https://github.com/yhsanave/penguin-schedule-notifier) for instructions to set up the forwarding service.
 
-Setup:
+Script Setup:
 In your copy of the spreadsheet: Extensions > Apps Script.
 Add a script file, then copy and paste this entire script into it.
-Create a webhook for the channels you want to send messages in and put them in the variables above (in the quotes). 
+Create a webhook (Server Settings > Integrations > Webhooks) for the channels you want to send messages in and put them in the variables above (in the quotes). 
 If you want to send the messages to the same channel, you can just put the same webhook link in both.
 Check that the Sheet Configs above are correct, in case the template has been updated.
 Add a time-driven trigger that runs the notify function every 10 minutes.
@@ -36,6 +31,7 @@ Add a time-driven trigger that runs the notify function every 10 minutes.
 Anyone with access to the spreadsheet can view this code, including your webhook and forwarding URLs.
 These are sensitive and could allow anyone to send messages to the channels.
 DO NOT SHARE this sheet or script publicly, or with anyone you don't trust, once you have added the URLs.
+If your webhook URLs get leaked, delete them and make new ones.
 */
 
 function notify() {
@@ -90,6 +86,7 @@ function getNextHourSlotsMessage() {
   return `Room is **+${emptySlots}** next hour (${nextHour})\n**Currently signed up:** ${fillers.filter(f => f != "").join(", ")}`;
 }
 
+// Send the message to the forwarding service, which forwards it to the provided webhook
 function sendMessage(content, webhookURL) {
   const options = {
     'method': 'post',
