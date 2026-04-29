@@ -17,4 +17,3 @@ def forward(message: Message):
             'Content-Type': 'application/json'
         }
     )
-    res.raise_for_status()
