@@ -15,11 +15,11 @@ An addon for [@infinite_penguin's PRSK tiering schedule template](https://docs.g
 
 ### Forwarding API
 
-Because of Discord's global rate limit, webhook requests from app scripts often get rate limited. To fix this, I created a [basic API](./forwarding-api/) that just forwards the request to bypass the rate limit. Deploy it to some server, then put the URL for that server in the forwardURL variable in [Notifications.gs](./Notifications.gs). 
+Because of Discord's global rate limit, webhook requests from app scripts often get rate limited. To fix this, I created a [basic API](./main.py) that just forwards the request to bypass the rate limit. Deploy it to some server, then put the URL for that server in the forwardURL variable in [Notifications.gs](./Notifications.gs).
 
 There is no security on here, so like don't go telling people you have this up because they could abuse it to proxy spam through your computer, which could result in you getting IP banned. Like for real this just straight up forwards anything you send to it. Really shouldn't be done but it works.
 
-Uses FastAPI so you can deploy it anywhere you could deploy that. See their [docs](https://fastapi.tiangolo.com/deployment/) for instructions. I used [Leapcell](https://leapcell.io) when I did it because it was the first search result. Their free tier should be plenty (no payment info needed) and it's pretty easy to set up (just fork this repo and you can deploy it directly with the config below).
+Uses FastAPI so you can deploy it anywhere you could deploy that. See their [docs](https://fastapi.tiangolo.com/deployment/) for more details. I used [Leapcell](https://leapcell.io) when I did it because it was the first search result. Their free tier should be plenty (no payment info needed) and it's pretty easy to set up (just fork this repo and you can deploy it directly from your GitHub with the config settings below).
 
 ### Leapcell Config
 
@@ -27,7 +27,7 @@ Uses FastAPI so you can deploy it anywhere you could deploy that. See their [doc
 | :--------------: | :-------------------------------------------: |
 | Framework Preset |                    FastAPI                    |
 |      Branch      |                     main                      |
-|  Root Directory  |               ./forwarding-api                |
+|  Root Directory  |                      ./                       |
 |     Runtime      |                    Python                     |
 |  Build Command   |       `pip install -r requirements.txt`       |
 |  Start Command   | `uvicorn main:app --host 0.0.0.0 --port 8080` |
