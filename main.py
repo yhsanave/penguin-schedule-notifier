@@ -13,7 +13,7 @@ app = FastAPI()
 
 @app.post('/')
 def forward(message: Message):
-    res = requests.post(
+    requests.post(
         url=message.webhookURL,
         data=message.content,
         headers={
